@@ -1,12 +1,11 @@
 import datetime as dt
 
 from django.core.exceptions import PermissionDenied
-from posts.models import Comment, Group, Post, User
+from posts.models import Comment, Group, Post
 from rest_framework import viewsets
-from rest_framework.permissions import AllowAny
 
 from .serializers import (CommentsSerializer, GroupSerializer,
-                          PostListSerializer, UserSerializer)
+                          PostListSerializer)
 
 
 class PostsViewSet(viewsets.ModelViewSet):
@@ -38,12 +37,6 @@ class PostsViewSet(viewsets.ModelViewSet):
 class GroupsViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Group.objects.all()
     serializer_class = GroupSerializer
-
-
-class UserViewSet(viewsets.ModelViewSet):
-    queryset = User.objects.all()
-    serializer_class = UserSerializer
-    permission_classes = (AllowAny,)
 
 
 class CommentsViewSet(viewsets.ModelViewSet):
